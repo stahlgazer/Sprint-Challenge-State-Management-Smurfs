@@ -28,10 +28,18 @@ function Form(props) {
 
   return (
     <div>
-      <form onSubmit={(event, props) => {
+      <form
+        className="form"
+        onSubmit={(event, props) => {
           event.preventDefault();
           handleSubmit(props);
-        }}>
+        }}
+      >
+        <div className="btnDiv">
+          <Button color="info" onSubmit={handleSubmit}>
+            Add a Smurf to the Village!
+          </Button>
+        </div>
         <Label>Name</Label>
         <Input
           autoFocus
@@ -65,9 +73,6 @@ function Form(props) {
           onChange={onChange}
           value={newSmurf.height}
         />
-        <Button color="info" onSubmit={handleSubmit}>
-          Add a Smurf to the Village!
-        </Button>
       </form>
     </div>
   );

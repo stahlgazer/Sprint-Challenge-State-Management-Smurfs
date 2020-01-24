@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchSmurf } from "../actions/index";
 import { Button } from "reactstrap";
-import axios from "axios";
 
 function Smurfs(props) {
   console.log(props, "Smurfs.js props");
@@ -21,11 +20,11 @@ function Smurfs(props) {
       {props.smurf &&
         !props.isLoading &&
         props.smurf.map(item => (
-          <div>
+          <div className="smurfs">
             <h2>Name: {item.name}</h2>
             <h2>Age: {item.age}</h2>
             <h2>Height: {item.height}</h2>
-            <Button>Remove Smurf</Button>
+            <Button color="danger">Remove Smurf</Button>
           </div>
         ))}
     </div>
