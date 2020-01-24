@@ -1,32 +1,33 @@
 import React from "react";
 import { connect } from "react-redux";
-import Loader from "react-loader-spinner";
 import { fetchSmurf } from "../actions/index";
 import { Button } from "reactstrap";
+import axios from "axios";
 
 function Smurfs(props) {
   console.log(props, "Smurfs.js props");
+
   return (
     <div className="smurfDiv">
       <div className="btnDiv">
+        {!props.smurf && !props.isLoading && (
+          <h2>Click to see/update our Village!</h2>
+        )}
         <Button color="success" onClick={() => props.fetchSmurf()}>
           Update Smurfs Village!
         </Button>
-        {!props.dog && !props.isLoading && <h2>Click to see a new dog!</h2>}
       </div>
-      {props.isLoading && (
-        <Loader
-          type="Puff"
-          color="white"
-          height={100}
-          width={100}
-          timeout={3000}
-        />
-      )}
 
-      {props.dog && !props.isLoading && (
-        <img alt="our new dog" src={props.dog.message}></img>
-      )}
+      {props.smurf &&
+        !props.isLoading &&
+        props.smurf.map(item => (
+          <div>
+            <h2>Name: {item.name}</h2>
+            <h2>Age: {item.age}</h2>
+            <h2>Height: {item.height}</h2>
+            <Button>Remove Smurf</Button>
+          </div>
+        ))}
     </div>
   );
 }
@@ -34,7 +35,7 @@ function Smurfs(props) {
 const mapStateToProps = state => {
   return {
     isLoading: state.isLoading,
-    smurf: state.dog,
+    smurf: state.smurf,
     error: state.error
   };
 };
